@@ -4,8 +4,10 @@ import tkinter as tk
 LIGHT_GRAY = "#8E8E8E"
 DARK_GRAY = "#1D1D1D"
 LABEL_COLOUR = "#FFFFFF"
+LIGHT_RED = "#FF6666"
 SMALL_FONT_STYLE = ("Calibri",16)
 LARGE_FONT_STYLE = ("Calibri",40,"bold")
+DEFAULT_FONT_STYLE = ("Calibri",20)
 class Calculator:
     def __init__(self):
         self.window =tk.Tk()
@@ -21,10 +23,37 @@ class Calculator:
                        4: (2, 1), 5: (2, 2), 6: (2, 3),
                        1: (3, 1), 2: (3, 2), 3: (3, 3),
                        0: (4, 2), '.': (4, 1)}  #dictionary for button positions
-        self.buttons_frame = self.create_digit_buttons()
+        self.operations = {"/": "\u00F7", "*": "\u00D7", "-": "-", "+": "+"} #unicode for division and multiplication symbols
+        self.buttons_frame.rowconfigure(0, weight=1) #makes rows and columns expand equally
+        for x in range(1,5):
+            self.buttons_frame.rowconfigure(x, weight=1) #makes rows and columns expand equally
+            self.buttons_frame.columnconfigure(x, weight=1)
+        self.create_digit_buttons()
+        self.create_operator_buttons()
+        self.create_special_buttons()
 
 
 
+    def create_operator_buttons(self):
+        i = 0
+        for operator, symbol in self.operations.items():
+            button = tk.Button(self.buttons_frame, text=symbol, bg=DARK_GRAY, fg=LABEL_COLOUR, font=DEFAULT_FONT_STYLE, borderwidth=0)
+            button.grid(row=i, column=4, sticky=tk.NSEW)
+            i += 1
+    
+    def create_special_buttons(self):
+        self.create_clear_button()
+        self.create_equals_button()
+
+    def create_clear_button(self):
+        button = tk.Button(self.buttons_frame, text="C", bg=DARK_GRAY, fg=LABEL_COLOUR, font=DEFAULT_FONT_STYLE, borderwidth=0)
+        button.grid(row=0, column=1, columnspan=3,sticky=tk.NSEW)
+    
+    def create_equals_button(self):
+        button = tk.Button(self.buttons_frame, text="=", bg=LIGHT_RED, fg=LABEL_COLOUR, font=DEFAULT_FONT_STYLE, borderwidth=0)
+        button.grid(row=4, column=3, columnspan=2,sticky=tk.NSEW)
+        return button
+    
     def create_display_labels(self):
         total_label = tk.Label(self.display_frame, text =self.total_expression, anchor=tk.E, bg=DARK_GRAY, fg=LABEL_COLOUR, padx=24, font=SMALL_FONT_STYLE) #East side of frame
         current_label = tk.Label(self.display_frame, text =self.current_expression, anchor=tk.E, bg=DARK_GRAY, fg=LABEL_COLOUR, padx=24, font=LARGE_FONT_STYLE)
@@ -39,7 +68,7 @@ class Calculator:
 
     def create_digit_buttons(self): #digit buttons
         for digit, grid_value in self.digits.items():
-            button = tk.Button(self.buttons_frame, text=str(digit), bg=LIGHT_GRAY, fg=LABEL_COLOUR, font=LARGE_FONT_STYLE)
+            button = tk.Button(self.buttons_frame, text=str(digit), bg=DARK_GRAY, fg=LABEL_COLOUR, font=LARGE_FONT_STYLE)
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW) #sticky for sticking buttons to North South East West
 
     def create_buttons_frame(self): #button frame

@@ -33,6 +33,9 @@ class Calculator:
         self.create_special_buttons()
         self.create_clear_button()
         self.create_equals_button()
+        self.create_square_button()
+        self.create_sqrt_button()
+        self.bind_keys()
 
     def append_operator(self, operator):
         self.current_expression += operator
@@ -48,13 +51,39 @@ class Calculator:
             button.grid(row=i, column=4, sticky=tk.NSEW)
             i += 1
     
+    def bind_keys(self):
+        self.window.bind("<Return>", lambda event: self.evaluate())  # specifies that pressing enter key is same as pressing equals button
+        for key in self.digits:
+            self.window.bind(str(key), lambda event, digit=key: self.add_to_expression(digit))
+        for key in self.operations:
+            self.window.bind(key, lambda event, operator=key: self.append_operator(operator))
+            self.window.bind("<BackSpace>", lambda event: self.clear())
+
     def create_special_buttons(self):
         self.create_clear_button()
         self.create_equals_button()
 
     def create_clear_button(self):
         button = tk.Button(self.buttons_frame, text="C", bg=DARK_GRAY, fg=LABEL_COLOUR, font=DEFAULT_FONT_STYLE, borderwidth=0, command=self.clear)
-        button.grid(row=0, column=1, columnspan=3,sticky=tk.NSEW)
+        button.grid(row=0, column=1,sticky=tk.NSEW)
+
+    def create_square_button(self):
+        button = tk.Button(self.buttons_frame, text="x\u00b2", bg=DARK_GRAY, fg=LABEL_COLOUR, font=DEFAULT_FONT_STYLE, borderwidth=0, command=self.square)
+        button.grid(row=0, column=2,sticky=tk.NSEW)
+        return button
+    
+    def square(self):
+        self.current_expression = str(eval(f"{self.current_expression}**2"))
+        self.update_label()
+
+    def create_sqrt_button(self):
+        button = tk.Button(self.buttons_frame, text="x\u221a", bg=DARK_GRAY, fg=LABEL_COLOUR, font=DEFAULT_FONT_STYLE, borderwidth=0, command=self.sqrt)
+        button.grid(row=0, column=3,sticky=tk.NSEW)
+        return button
+    
+    def sqrt(self):
+        self.current_expression = str(eval(f"{self.current_expression}**0.5"))
+        self.update_label()
     
     def clear(self):
         self.current_expression = ""
@@ -104,13 +133,16 @@ class Calculator:
         frame = tk.Frame(self.window)
         frame.pack(expand=True, fill="both")
         return frame
+    
     def update_total_label(self):
         expression = self.total_expression
         for operator, symbol in self.operations.items():
             expression = expression.replace(operator, f' {symbol} ')
-        self.total_label.config(text=self.total_expression)
+        self.total_label.config(text=expression)
+
     def update_label(self):
-        self.current_label.config(text=self.current_expression)
+        self.current_label.config(text=self.current_expression[:11])
+
     def run(self):
         self.window.mainloop() #helps run calculator
 

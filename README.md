@@ -72,6 +72,4 @@ Double-click `calc.exe` (Python installation not required).
 
 **Joel Jaison**
 GitHub: [https://github.com/joel-jaison-codes](https://github.com/joel-jaison-codes)
-
-Just tell me how you plan to use it.
-
+**Credits**: Programiz(https://www.youtube.com/watch?v=QZPv1y2znZo)

@@ -1,6 +1,6 @@
-# Calculator App (Python Tkinter)
+# Dark Mode - Basic Calculator App (Python Tkinter)
 
-A clean, responsive **desktop calculator application** built using **Python and Tkinter**, designed to replicate a modern smartphone-style calculator interface. This project demonstrates practical GUI design, event handling, and object-oriented programming in Python.
+A clean, responsive **desktop calculator application** built using **Python and Tkinter**, designed to replicate a modern smartphone-style calculator interface. This practice project helped me learn basics of practical GUI design, event handling, and object-oriented programming in Python.
 
 ---
 
@@ -68,27 +68,10 @@ Double-click `calc.exe` (Python installation not required).
 
 ---
 
-## 🔮 Future Improvements
-
-* Memory functions (M+, M−, MR)
-* Percentage and scientific operations
-* Dark/light theme toggle
-* Improved input validation (avoid `eval()`)
-
----
-
 ## 👤 Author
 
 **Joel Jaison**
 GitHub: [https://github.com/joel-jaison-codes](https://github.com/joel-jaison-codes)
-
----
-
-If you want, I can also:
-
-* Rewrite this README for **academic submission**
-* Add **badges, screenshots, or demo GIFs**
-* Prepare a **portfolio-ready project description**
 
 Just tell me how you plan to use it.
 

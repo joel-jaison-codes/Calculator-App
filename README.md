@@ -2,6 +2,7 @@
 
 A clean, responsive **desktop calculator application** built using **Python and Tkinter**, designed to replicate a modern smartphone-style calculator interface. This practice project helped me learn basics of practical GUI design, event handling, and object-oriented programming in Python.
 
+**Credits**: Programiz(https://www.youtube.com/watch?v=QZPv1y2znZo)
 ---
 
 ## 🚀 Features
